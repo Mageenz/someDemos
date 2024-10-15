@@ -1,24 +1,9 @@
-# vue2-demo
+# 一些demo
+工作上调研和试验的一些产物，用个项目记录一下。
 
-## Project setup
+## 安装与启动
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
-```
-
-### Compiles and minifies for production
-```
 npm run build
 ```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

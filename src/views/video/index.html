@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自适应iframe</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+        .iframe-container {
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 宽高比 (9 / 16 = 0.5625) */
+            position: relative;
+            overflow: hidden;
+        }
+        .iframe-container.landscape {
+            width: auto;
+            height: 100vh;
+            padding-top: 0;
+            display: flex;
+            justify-content: center;
+        }
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .landscape iframe {
+            position: static;
+            width: 177.78vh; /* 16:9 宽高比 (16 / 9 = 1.7778) */
+            height: 100%;
+        }
+        #outBtns .line{
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+        }
+        #innerBtns {
+          position: absolute;
+          top: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 177.78vh; /* 16:9 宽高比 (16 / 9 = 1.7778) */
+          height: 100%;
+          display: flex;
+          justify-content: space-between;
+        }
+        #innerBtns .line {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-end;
+        }
+        .btns button {
+          width: 50px;
+          height: 50px;
+          border-radius: 100%;
+          background: red;
+          border: none;
+          margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="iframeContainer" class="iframe-container">
+        <iframe src="https://example.com" frameborder="0" allowfullscreen></iframe>
+        <div id="innerBtns" class="btns">
+          <div class="line">
+            <button></button>
+            <button></button>
+          </div>
+          <div class="line">
+            <button></button>
+            <button></button>
+          </div>
+        </div>
+    </div>
+    <div id="outBtns" class="btns">
+      <div class="line">
+        <button></button>
+        <button></button>
+      </div>
+      <div class="line">
+        <button></button>
+        <button></button>
+      </div>
+    </div>
+
+    <script>
+        const container = document.getElementById('iframeContainer');
+        const outBtns = document.getElementById('outBtns');
+        const innerBtns = document.getElementById('innerBtns');
+
+        function checkOrientation() {
+            if (window.innerWidth > window.innerHeight) {
+                container.classList.add('landscape');
+                outBtns.style.display = 'none';
+                innerBtns.style.display = 'flex';
+            } else {
+                container.classList.remove('landscape');
+                outBtns.style.display = 'block';
+                innerBtns.style.display = 'none';
+            }
+        }
+
+        // 初始检查
+        checkOrientation();
+
+        // 监听窗口大小变化
+        window.addEventListener('resize', checkOrientation);
+    </script>
+</body>
+</html>
